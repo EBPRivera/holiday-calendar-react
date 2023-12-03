@@ -35,7 +35,9 @@ const AuthRouting = () => {
           <Col sm={2} className="px-0">
             <NavigationBar />
           </Col>
-          <Col sm={10}>{renderRouting()}</Col>
+          <Col sm={10} className="page-content">
+            {renderRouting()}
+          </Col>
         </Row>
       </Container>
     </div>
