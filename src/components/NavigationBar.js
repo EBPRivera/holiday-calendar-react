@@ -14,11 +14,17 @@ const NavigationBar = () => {
         <Navbar.Toggle />
         <Navbar.Collapse>
           <Nav>
-            <Nav.Link name="/" onClick={handleNavigate}>
+            <Nav.Link name="/home" onClick={handleNavigate}>
               Home
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
+        <Nav>
+          <Nav.Link>Signup</Nav.Link>
+          <Nav.Link name="/login" onClick={handleNavigate}>
+            Login
+          </Nav.Link>
+        </Nav>
       </Container>
     </Navbar>
   );
