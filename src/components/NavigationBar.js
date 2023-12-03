@@ -1,31 +1,54 @@
+import _ from "lodash";
 import { useNavigate } from "react-router";
-import { Container, Navbar, Nav } from "react-bootstrap";
+import { Navbar, Nav } from "react-bootstrap";
+import { useSelector } from "react-redux";
 
 const NavigationBar = () => {
   const navigate = useNavigate();
+  const user = useSelector((state) => state.user);
 
   const handleNavigate = (e) => {
     navigate(e.target.name);
   };
 
+  const renderAdminLinks = () => {
+    if (!_.isEqual(user.role, "Admin")) return;
+
+    return (
+      <>
+        <Nav.Item>
+          <h5>Admin Links</h5>
+        </Nav.Item>
+        <hr />
+        <Nav.Link name="/admin/users" onClick={handleNavigate}>
+          Users
+        </Nav.Link>
+        <Nav.Link name="/admin/users" onClick={handleNavigate}>
+          Holidays CRUD
+        </Nav.Link>
+      </>
+    );
+  };
+
   return (
-    <Navbar collapseOnSelect expand="lg" className="bg-body-secondary">
-      <Container>
-        <Navbar.Toggle />
-        <Navbar.Collapse>
-          <Nav>
-            <Nav.Link name="/home" onClick={handleNavigate}>
-              Home
-            </Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-        <Nav>
-          <Nav.Link>Signup</Nav.Link>
-          <Nav.Link name="/login" onClick={handleNavigate}>
-            Login
-          </Nav.Link>
-        </Nav>
-      </Container>
+    <Navbar
+      collapseOnSelect
+      expand="lg"
+      className="bg-body-secondary side-navigation-bar"
+    >
+      <Nav className="flex-column text-start">
+        {renderAdminLinks()}
+        <Nav.Item>
+          <h5>Calendar</h5>
+        </Nav.Item>
+        <hr />
+        <Nav.Link name="/calendar/months" onClick={handleNavigate}>
+          Month View
+        </Nav.Link>
+        <Nav.Link name="/calendar/holidays" onClick={handleNavigate}>
+          Holidays
+        </Nav.Link>
+      </Nav>
     </Navbar>
   );
 };
