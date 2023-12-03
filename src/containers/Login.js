@@ -38,7 +38,7 @@ const Login = () => {
 
   return (
     <div id="login-page">
-      <div class="gradient" />
+      <div className="gradient" />
       <Container>
         <Row>
           <Col xs={8} />
