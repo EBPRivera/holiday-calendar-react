@@ -26,10 +26,14 @@ const Login = () => {
         navigate("/calendar");
       })
       .catch((e) => {
-        let errors = e.response.data;
-        if (!(errors instanceof Object)) setErrors([errors]);
-        else {
-          setErrors(_.map(errors.errors, (error) => error));
+        try {
+          let errors = e.response.data;
+          if (!(errors instanceof Object)) setErrors([errors]);
+          else {
+            setErrors(_.map(errors.errors, (error) => error));
+          }
+        } catch {
+          setErrors([e.message]);
         }
       });
 
