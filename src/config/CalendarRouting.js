@@ -32,7 +32,6 @@ const CalendarRouting = () => {
   };
 
   useEffect(() => {
-    console.log("Fetching");
     fetchCalendarData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
