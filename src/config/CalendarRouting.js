@@ -3,7 +3,8 @@ import { Routes, Route } from "react-router-dom";
 
 import useAxiosInstance from "../hooks/useAxiosInstance";
 
-import Home from "../containers/Home";
+import CalendarDashboard from "../containers/CalendarDashboard";
+import CalendarMonthView from "../containers/CalendarMonthView";
 import Holidays from "../containers/Holidays";
 
 const INIT_CALENDAR_DATA = {
@@ -32,7 +33,6 @@ const CalendarRouting = () => {
   };
 
   useEffect(() => {
-    console.log("Fetching");
     fetchCalendarData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -40,7 +40,8 @@ const CalendarRouting = () => {
   return (
     <CalendarContext.Provider value={calendarData}>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<CalendarDashboard />} />
+        <Route path="/month-view" element={<CalendarMonthView />} />
         <Route path="/holidays" element={<Holidays />} />
       </Routes>
     </CalendarContext.Provider>

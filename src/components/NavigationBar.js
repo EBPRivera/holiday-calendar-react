@@ -42,7 +42,10 @@ const NavigationBar = () => {
           <h5>Calendar</h5>
         </Nav.Item>
         <hr />
-        <Nav.Link name="/calendar/months" onClick={handleNavigate}>
+        <Nav.Link name="/calendar" onClick={handleNavigate}>
+          Dashboard
+        </Nav.Link>
+        <Nav.Link name="/calendar/month-view" onClick={handleNavigate}>
           Month View
         </Nav.Link>
         <Nav.Link name="/calendar/holidays" onClick={handleNavigate}>

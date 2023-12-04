@@ -1,0 +1,14 @@
+.calendar {
+  overflow: hidden;
+
+  .card-title {
+    background-color: var(--bs-gray-800);
+    color: var(--bs-gray-400);
+  }
+
+  .calendar-table-body {
+    .holiday {
+      background-color: var(--bs-green);
+    }
+  }
+}
