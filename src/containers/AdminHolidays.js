@@ -1,5 +1,6 @@
 import { useContext } from "react";
-import { Container, Row, Col, Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { Container, Row, Col, Card, Button } from "react-bootstrap";
 
 import AdminHolidaysList from "../components/AdminHolidaysList";
 import { AdminContext } from "../config/AdminRouting";
@@ -11,11 +12,14 @@ const AdminHolidays = () => {
   return (
     <Container className="mt-3">
       <Row className="mb-3">
-        <Col>
+        <Col className="text-start">
           <Card>
             <Card.Body>
-              <Card.Title>
-                <h3>Holidays Crud</h3>
+              <Card.Title className="d-flex align-items-end">
+                <h3 className="me-3 mb-0">Holidays Crud</h3>
+                <Link to="./create">
+                  <Button variant="success">Create Holiday</Button>
+                </Link>
               </Card.Title>
             </Card.Body>
           </Card>

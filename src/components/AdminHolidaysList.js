@@ -11,7 +11,7 @@ const DEFAULT_HOLIDAY_STATE = null;
 
 const AdminHolidaysList = ({ holidays, label }) => {
   const adminData = useContext(AdminContext);
-  const { fetchHolidays } = adminData;
+  const { fetchAdminData } = adminData;
   const axiosInstance = useAxiosInstance();
   const [showModal, setShowModal] = useState(false);
   const [holidayId, setHolidayId] = useState(DEFAULT_HOLIDAY_STATE);
@@ -30,7 +30,7 @@ const AdminHolidaysList = ({ holidays, label }) => {
     setShowModal(false);
 
     await axiosInstance.delete(`/holidays/${holidayId}`).then(() => {
-      fetchHolidays();
+      fetchAdminData();
     });
 
     setHolidayId(DEFAULT_HOLIDAY_STATE);
