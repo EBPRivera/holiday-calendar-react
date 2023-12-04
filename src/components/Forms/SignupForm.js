@@ -7,28 +7,37 @@ import CTextInput from "../CustomInputs/CTextInput";
 import CPasswordInput from "../CustomInputs/CPasswordInput";
 import ErrorAlert from "../ErrorAlert";
 
-const DEFAULT_CREDENTIALS = {
+const INIT_FORM_DATA = {
   username: "",
   password: "",
+  confirmPassword: "",
+  firstName: "",
+  lastName: "",
 };
 
-const LoginForm = ({ onSubmit, isLoading, errors }) => {
-  const [credentials, setCredentials] = useState(DEFAULT_CREDENTIALS);
+const SignupForm = ({ onError, onSubmit, isLoading, errors }) => {
+  const [formData, setFormData] = useState(INIT_FORM_DATA);
 
   const handleChange = (key, value) => {
-    setCredentials((credentials) => ({ ...credentials, [key]: value }));
+    setFormData((credentials) => ({ ...credentials, [key]: value }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(credentials);
+    const { password, confirmPassword } = formData;
+    if (!_.isEqual(password, confirmPassword)) {
+      onError(["Password confirmation invalid"]);
+      return;
+    }
+
+    onSubmit(formData);
   };
 
   return (
     <Card className="auth-form">
       <Card.Body>
         <Card.Title>
-          <h3>Login</h3>
+          <h3>Signup</h3>
         </Card.Title>
         <Form onSubmit={handleSubmit}>
           <CTextInput
@@ -41,11 +50,16 @@ const LoginForm = ({ onSubmit, isLoading, errors }) => {
             label="Password"
             onChange={(value) => handleChange("password", value)}
           />
+          <CPasswordInput
+            className="mb-3"
+            label="Confirm Password"
+            onChange={(value) => handleChange("confirmPassword", value)}
+          />
           <div className="d-flex flex-row align-items-end">
             <Button disabled={isLoading} type="submit" className="me-3">
               {isLoading ? <Spinner as="span" size="sm" /> : "Submit"}
             </Button>
-            <Link to="/register">Don't have an account? Signup</Link>
+            <Link to="/login">Already have an account? Login</Link>
           </div>
         </Form>
         {!_.isEmpty(errors) && <ErrorAlert className="mt-3" errors={errors} />}
@@ -54,4 +68,4 @@ const LoginForm = ({ onSubmit, isLoading, errors }) => {
   );
 };
 
-export default LoginForm;
+export default SignupForm;
