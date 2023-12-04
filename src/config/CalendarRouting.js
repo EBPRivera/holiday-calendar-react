@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 
 import useAxiosInstance from "../hooks/useAxiosInstance";
 
-import Home from "../containers/Home";
+import CalendarDashboard from "../containers/CalendarDashboard";
 import Holidays from "../containers/Holidays";
 
 const INIT_CALENDAR_DATA = {
@@ -40,7 +40,7 @@ const CalendarRouting = () => {
   return (
     <CalendarContext.Provider value={calendarData}>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<CalendarDashboard />} />
         <Route path="/holidays" element={<Holidays />} />
       </Routes>
     </CalendarContext.Provider>
