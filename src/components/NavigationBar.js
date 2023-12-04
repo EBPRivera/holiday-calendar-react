@@ -20,10 +20,7 @@ const NavigationBar = () => {
           <h5>Admin Links</h5>
         </Nav.Item>
         <hr />
-        <Nav.Link name="/admin/users" onClick={handleNavigate}>
-          Users
-        </Nav.Link>
-        <Nav.Link name="/admin/users" onClick={handleNavigate}>
+        <Nav.Link name="/admin/holidays" onClick={handleNavigate}>
           Holidays CRUD
         </Nav.Link>
       </>
