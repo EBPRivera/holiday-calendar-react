@@ -6,6 +6,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import NavigationBar from "../components/NavigationBar";
 import Header from "../components/Header";
 import CalendarRouting from "./CalendarRouting";
+import AdminRouting from "./AdminRouting";
 import Landing from "../containers/Landing";
 
 const AuthRouting = () => {
@@ -23,6 +24,7 @@ const AuthRouting = () => {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/calendar/*" element={<CalendarRouting />} />
+        <Route path="/admin/*" element={<AdminRouting />} />
       </Routes>
     );
   };
