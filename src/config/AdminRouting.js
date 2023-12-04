@@ -26,7 +26,9 @@ const AdminRouting = () => {
   }, []);
 
   return (
-    <AdminContext.Provider value={contextData}>
+    <AdminContext.Provider
+      value={{ ...contextData, fetchHolidays: fetchHolidays }}
+    >
       <Routes>
         <Route path="/holidays" element={<AdminHolidays />} />
       </Routes>

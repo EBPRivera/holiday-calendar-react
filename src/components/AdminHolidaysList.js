@@ -1,14 +1,17 @@
 import _ from "lodash";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Spinner, ListGroup, Card, Button } from "react-bootstrap";
 
 import useAxiosInstance from "../hooks/useAxiosInstance";
 import getMonthName from "../helpers/getMonthName";
+import { AdminContext } from "../config/AdminRouting";
 import CModal from "./CModal";
 
 const DEFAULT_HOLIDAY_STATE = null;
 
 const AdminHolidaysList = ({ holidays, label }) => {
+  const adminData = useContext(AdminContext);
+  const { fetchHolidays } = adminData;
   const axiosInstance = useAxiosInstance();
   const [showModal, setShowModal] = useState(false);
   const [holidayId, setHolidayId] = useState(DEFAULT_HOLIDAY_STATE);
@@ -26,7 +29,9 @@ const AdminHolidaysList = ({ holidays, label }) => {
   const handleConfirmDelete = async () => {
     setShowModal(false);
 
-    await axiosInstance.delete(`/holidays/${holidayId}`);
+    await axiosInstance.delete(`/holidays/${holidayId}`).then(() => {
+      fetchHolidays();
+    });
 
     setHolidayId(DEFAULT_HOLIDAY_STATE);
   };
