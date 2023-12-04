@@ -6,7 +6,7 @@ import useAxiosInstance from "../hooks/useAxiosInstance";
 import { CalendarContext } from "../config/CalendarRouting";
 import Calendar from "../components/Calendar";
 import HolidaysList from "../components/HolidaysList";
-import CDatePicker from "../components/Forms/CDatePicker";
+import CMonthYearPicker from "../components/Forms/CMonthYearPicker";
 import generateCalendarWeekDays2DArray from "../helpers/generateCalendarDays";
 
 const DEFAULT_DATE = new Date();
@@ -73,10 +73,7 @@ const CalendarMonthView = () => {
     );
   };
 
-  const handleDateChange = (e) => {
-    e.preventDefault();
-    const date = new Date(e.target.value);
-
+  const handleDateChange = (date) => {
     setDate(date);
     setCalendarDays(generateCalendarWeekDays2DArray(date));
   };
@@ -92,11 +89,9 @@ const CalendarMonthView = () => {
                   <h3>Month View</h3>
                 </Card.Title>
                 <div className="d-flex flex-column w-25">
-                  <CDatePicker
+                  <CMonthYearPicker
                     className="mb-3"
-                    value={date}
                     onChange={handleDateChange}
-                    label="Select Date"
                   />
                   {renderCountryDropDown()}
                 </div>
