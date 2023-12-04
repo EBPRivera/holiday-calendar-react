@@ -8,7 +8,7 @@ import useAxiosInstance from "../hooks/useAxiosInstance";
 const AdminHolidayCreate = () => {
   const [isLoading, setIsLoading] = useState(false);
   const adminData = useContext(AdminContext);
-  const { countries } = adminData;
+  const { countries, fetchAdminData } = adminData;
   const axiosInstance = useAxiosInstance();
 
   const handleSubmit = async (formData) => {
@@ -16,12 +16,22 @@ const AdminHolidayCreate = () => {
     setIsLoading(true);
 
     if (countryId > 0) {
-      await axiosInstance.post(`/countries/${countryId}/holidays`, {
-        name,
-        month,
-        day,
-        year,
-      });
+      await axiosInstance
+        .post(`/countries/${countryId}/holidays`, {
+          name,
+          month,
+          day,
+          year,
+        })
+        .then(() => {
+          fetchAdminData();
+        });
+    } else {
+      await axiosInstance
+        .post("/holidays", { name, month, day, year })
+        .then(() => {
+          fetchAdminData();
+        });
     }
 
     setIsLoading(false);
