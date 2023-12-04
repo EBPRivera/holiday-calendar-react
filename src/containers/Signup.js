@@ -1,29 +1,30 @@
 import { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import getErrors from "../helpers/getErrors";
 import useAxiosInstance from "../hooks/useAxiosInstance";
-import { login } from "../features/user";
-import LoginForm from "../components/Forms/LoginForm";
+import SignupForm from "../components/Forms/SignupForm";
 
-const Login = () => {
+const Signup = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState([]);
-  const dispatch = useDispatch();
   const axiosInstance = useAxiosInstance();
   const navigate = useNavigate();
 
-  const handleLogin = async (credentials) => {
-    const { username, password } = credentials;
+  const handleLogin = async (formData) => {
+    const { username, password, firstName, lastName } = formData;
     setIsLoading(true);
 
     await axiosInstance
-      .post("/auth/login", { username, password })
-      .then(({ data }) => {
-        dispatch(login({ token: data }));
-        navigate("/calendar");
+      .post("/auth/register", {
+        username,
+        password,
+        firstName,
+        lastName,
+      })
+      .then(() => {
+        navigate("/login");
       })
       .catch((e) => {
         setErrors(getErrors(e));
@@ -33,15 +34,16 @@ const Login = () => {
   };
 
   return (
-    <div id="login-page" className="auth-form-page">
+    <div id="signup-page" className="auth-form-page">
       <div className="gradient" />
       <Container>
         <Row>
           <Col xs={8} />
           <Col xs={4}>
-            <LoginForm
+            <SignupForm
               onSubmit={handleLogin}
               isLoading={isLoading}
+              onError={setErrors}
               errors={errors}
             />
           </Col>
@@ -51,4 +53,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;
